@@ -1,4 +1,4 @@
-package com.ambrosia.inscriptions;
+package com.ambrosia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
