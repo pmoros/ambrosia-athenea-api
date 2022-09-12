@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   db:
     image: mysql:5.7
@@ -21,12 +22,6 @@ services:
     # volumes:
       # - my-db:/var/lib/mysql
 
-  # spring-api:
-  #   build: .
-  #   ports:
-  #     - '8080:8080'
-  #   expose:
-  #     - '8080'
 
 # Names our volume
 volumes:
