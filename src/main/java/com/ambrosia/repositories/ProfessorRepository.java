@@ -8,6 +8,6 @@ import com.ambrosia.models.Professor;
 
 public interface ProfessorRepository extends CrudRepository<Professor, Long> {
 
-    Professor findByProfessorCode(String professorCode);
+    List<Professor> findByProfessorCode(String professorCode);
 
 }

@@ -42,7 +42,8 @@ public class CourseGroupController {
             @RequestParam String professorCode) {
         List<CourseGroup> courseGroups = this.courseGroupRepository.findByCourseCodeAndCourseGroupCode(courseCode,
                 courseGroupCode);
-        Professor professor = this.professorRepository.findByProfessorCode(professorCode);
+        List<Professor> professors = this.professorRepository.findByProfessorCode(professorCode);
+        Professor professor = professors.get(0);
         CourseGroup courseGroup = courseGroups.get(0);
         courseGroup.setProfessor(professor);
         this.courseGroupRepository.save(courseGroup);
