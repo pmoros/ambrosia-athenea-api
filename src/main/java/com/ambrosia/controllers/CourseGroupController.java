@@ -26,12 +26,14 @@ public class CourseGroupController {
     @Autowired
     private ProfessorRepository professorRepository;
 
+    @Autowired
+    private ScheduleRepository scheduleRepository;
+
     @PostMapping("/inscriptions/course-groups")
     @ResponseStatus(HttpStatus.CREATED)
-    public CourseGroup createCourseGroup(@RequestBody CourseGroup courseGroup) {
+    public void createCourseGroup(@RequestBody CourseGroup courseGroup) {
         // TODO: check if courseGroup already exists
         courseGroup = this.courseGroupRepository.save(courseGroup);
-        return courseGroup;
     }
 
     @PostMapping("/inscriptions/course-groups/professor")
@@ -43,6 +45,20 @@ public class CourseGroupController {
         Professor professor = this.professorRepository.findByProfessorCode(professorCode);
         CourseGroup courseGroup = courseGroups.get(0);
         courseGroup.setProfessor(professor);
+        this.courseGroupRepository.save(courseGroup);
+    }
+
+    @PostMapping("/inscriptions/course-groups/schedules")
+    @ResponseStatus(HttpStatus.OK)
+    public void setSchedules(@RequestParam String courseCode, @RequestParam String courseGroupCode,
+            @RequestBody List<Schedule> schedules) {
+        // ! This saves the schedules in the database every time
+        this.scheduleRepository.saveAll(schedules);
+
+        List<CourseGroup> courseGroups = this.courseGroupRepository.findByCourseCodeAndCourseGroupCode(courseCode,
+                courseGroupCode);
+        CourseGroup courseGroup = courseGroups.get(0);
+        courseGroup.setSchedules(schedules);
         this.courseGroupRepository.save(courseGroup);
     }
 
