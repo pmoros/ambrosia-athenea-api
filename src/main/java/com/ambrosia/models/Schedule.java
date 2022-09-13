@@ -3,11 +3,14 @@ package com.ambrosia.models;
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Schedule {
@@ -26,8 +29,9 @@ public class Schedule {
     @Column
     private String timeOfEnd;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "course_group_id")
+    @JoinColumn(name = "course_group_id", referencedColumnName = "id")
     private CourseGroup courseGroup;
 
     protected Schedule() {

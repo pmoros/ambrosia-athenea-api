@@ -10,4 +10,7 @@ public interface CourseGroupRepository extends CrudRepository<CourseGroup, Long>
 
     List<CourseGroup> findByCourseCodeAndCourseGroupCode(String courseCode, String courseGroupCode);
 
+    List<CourseGroup> findAllByCourseCodeOrCourseGroupCodeOrCourseName(String courseCode, String courseGroupCode,
+            String courseName);
+
 }

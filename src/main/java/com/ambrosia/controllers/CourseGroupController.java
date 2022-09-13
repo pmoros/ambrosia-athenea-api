@@ -53,13 +53,29 @@ public class CourseGroupController {
     public void setSchedules(@RequestParam String courseCode, @RequestParam String courseGroupCode,
             @RequestBody List<Schedule> schedules) {
         // ! This saves the schedules in the database every time
-        this.scheduleRepository.saveAll(schedules);
 
         List<CourseGroup> courseGroups = this.courseGroupRepository.findByCourseCodeAndCourseGroupCode(courseCode,
                 courseGroupCode);
         CourseGroup courseGroup = courseGroups.get(0);
+
+        for (Schedule schedule : schedules) {
+            schedule.setCourseGroup(courseGroup);
+            this.scheduleRepository.save(schedule);
+        }
+
         courseGroup.setSchedules(schedules);
         this.courseGroupRepository.save(courseGroup);
+    }
+
+    @GetMapping("/inscriptions/course-groups")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<CourseGroup> getCourseGroups(@RequestParam String courseCode,
+            @RequestParam String courseGroupCode, @RequestParam String courseName) {
+        List<CourseGroup> groups = this.courseGroupRepository.findAllByCourseCodeOrCourseGroupCodeOrCourseName(
+                courseCode, courseGroupCode,
+                courseName);
+
+        return groups;
     }
 
 }
