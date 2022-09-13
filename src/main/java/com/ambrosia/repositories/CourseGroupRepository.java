@@ -8,4 +8,6 @@ import com.ambrosia.models.CourseGroup;
 
 public interface CourseGroupRepository extends CrudRepository<CourseGroup, Long> {
 
+    List<CourseGroup> findByCourseCodeAndCourseGroupCode(String courseCode, String courseGroupCode);
+
 }

@@ -1,10 +1,15 @@
 package com.ambrosia.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class CourseGroup {
@@ -25,17 +30,25 @@ public class CourseGroup {
     @Column
     private String taken;
 
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    @OneToMany(mappedBy = "courseGroup")
+    private List<Schedule> schedules;
+
     protected CourseGroup() {
     }
 
     public CourseGroup(String courseGroupCode, String courseCode, String courseName, String courseDescription,
-            String capacity, String taken) {
+            String capacity, String taken, List<Schedule> schedules) {
         this.courseGroupCode = courseGroupCode;
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.courseDescription = courseDescription;
         this.capacity = capacity;
         this.taken = taken;
+        this.schedules = schedules;
     }
 
     @Override
@@ -73,6 +86,10 @@ public class CourseGroup {
         return taken;
     }
 
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
     public void setCourseGroupCode(String courseGroupCode) {
         this.courseGroupCode = courseGroupCode;
     }
@@ -95,6 +112,14 @@ public class CourseGroup {
 
     public void setTaken(String taken) {
         this.taken = taken;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
+    public void setProfessor(Professor professor2) {
+        this.professor = professor2;
     }
 
 }
