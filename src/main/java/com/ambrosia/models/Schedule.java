@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+// TODO: Use lombok for getters and setters
 @Entity
 public class Schedule {
 

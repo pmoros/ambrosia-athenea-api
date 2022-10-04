@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+// TODO: Use lombok for getters and setters
 @Entity
 public class Professor {
     @Id

@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+// TODO: Use lombok for getters and setters
 @Entity
 public class CourseGroup {
 
