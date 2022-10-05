@@ -18,4 +18,6 @@ public interface CourseGroupRepository extends CrudRepository<CourseGroup, Long>
 
     List<CourseGroup> findAllByProfessorUsername(String professorUsername);
 
+    List<CourseGroup> findByProfessorUsername(String professorUsername);
+
 }
