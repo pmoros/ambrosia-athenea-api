@@ -9,4 +9,6 @@ import com.ambrosia.models.Enrollment;
 public interface EnrollmentRepository extends CrudRepository<Enrollment, Long> {
     List<Enrollment> findAllByStudentUsernameAndAcademicHistoryCode(String studentUsername,
             String academicHistoryCode);
+
+    List<Enrollment> findAllByStudentUsername(String courseName);
 }
