@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 // TODO: Use lombok for getters and setters
@@ -41,7 +42,8 @@ public class CourseGroup {
     @OneToMany(mappedBy = "courseGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
-    @ManyToMany(mappedBy = "courseGroups")
+    @JsonBackReference
+    @ManyToMany(mappedBy = "courseGroups", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Enrollment> enrollments;
 
     protected CourseGroup() {
@@ -101,6 +103,10 @@ public class CourseGroup {
         return professorUsername;
     }
 
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
     public void setCourseGroupCode(String courseGroupCode) {
         this.courseGroupCode = courseGroupCode;
     }
@@ -131,6 +137,10 @@ public class CourseGroup {
 
     public void setProfessorUsername(String professorUsername) {
         this.professorUsername = professorUsername;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 
 }

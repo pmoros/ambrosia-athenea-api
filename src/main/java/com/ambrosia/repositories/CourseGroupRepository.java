@@ -1,6 +1,7 @@
 package com.ambrosia.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,7 +11,13 @@ public interface CourseGroupRepository extends CrudRepository<CourseGroup, Long>
 
     List<CourseGroup> findByCourseCodeAndCourseGroupCode(String courseCode, String courseGroupCode);
 
-    List<CourseGroup> findAllByCourseCodeOrCourseGroupCodeOrCourseName(String courseCode, String courseGroupCode,
-            String courseName);
+    // ! TODO: fix returns empty list when courseGroupCode and courseCode are null
+    List<CourseGroup> findAllByCourseCodeOrCourseGroupCodeOrCourseName(Optional<String> courseCode,
+            Optional<String> courseGroupCode,
+            Optional<String> courseName);
+
+    List<CourseGroup> findAllByProfessorUsername(String professorUsername);
+
+    List<CourseGroup> findByProfessorUsername(String professorUsername);
 
 }

@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // TODO: Use lombok for getters and setters
 @Entity
 public class Enrollment {
@@ -23,6 +25,7 @@ public class Enrollment {
     @Column
     private String academicHistoryCode;
 
+    // @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "enrollment_course_group", joinColumns = @JoinColumn(name = "enrollment_id"), inverseJoinColumns = @JoinColumn(name = "course_group_id"))
     List<CourseGroup> courseGroups;
@@ -52,6 +55,14 @@ public class Enrollment {
 
     public void setAcademicHistoryCode(String academicHistoryCode) {
         this.academicHistoryCode = academicHistoryCode;
+    }
+
+    public List<CourseGroup> getCourseGroups() {
+        return courseGroups;
+    }
+
+    public void setCourseGroups(List<CourseGroup> courseGroups) {
+        this.courseGroups = courseGroups;
     }
 
 }
