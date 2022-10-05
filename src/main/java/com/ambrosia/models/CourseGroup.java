@@ -9,13 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 // TODO: Use lombok for getters and setters
+// TODO: refactor capacity in other table
 @Entity
 public class CourseGroup {
 
@@ -31,17 +31,18 @@ public class CourseGroup {
     @Column
     private String courseDescription;
     @Column
+    private String professorUsername;
+    @Column
     private String capacity;
     @Column
     private String taken;
 
-    @ManyToOne
-    @JoinColumn(name = "professor_id")
-    private Professor professor;
-
     @JsonManagedReference
     @OneToMany(mappedBy = "courseGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Schedule> schedules;
+
+    @ManyToMany(mappedBy = "courseGroups")
+    private List<Enrollment> enrollments;
 
     protected CourseGroup() {
     }
@@ -96,6 +97,10 @@ public class CourseGroup {
         return schedules;
     }
 
+    public String getProfessorUsername() {
+        return professorUsername;
+    }
+
     public void setCourseGroupCode(String courseGroupCode) {
         this.courseGroupCode = courseGroupCode;
     }
@@ -124,8 +129,8 @@ public class CourseGroup {
         this.schedules = schedules;
     }
 
-    public void setProfessor(Professor professor2) {
-        this.professor = professor2;
+    public void setProfessorUsername(String professorUsername) {
+        this.professorUsername = professorUsername;
     }
 
 }

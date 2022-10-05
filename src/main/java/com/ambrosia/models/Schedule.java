@@ -1,9 +1,7 @@
 package com.ambrosia.models;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -83,6 +81,30 @@ public class Schedule {
 
     public void setCourseGroup(CourseGroup courseGroup) {
         this.courseGroup = courseGroup;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
+    }
+
+    public void setTimeOfStart(String timeOfStart) {
+        this.timeOfStart = timeOfStart;
+    }
+
+    public void setTimeOfEnd(String timeOfEnd) {
+        this.timeOfEnd = timeOfEnd;
     }
 
 }
