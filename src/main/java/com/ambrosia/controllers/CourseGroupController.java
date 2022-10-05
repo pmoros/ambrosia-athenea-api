@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,11 @@ public class CourseGroupController {
     private CourseGroupRepository courseGroupRepository;
 
     Logger logger = LoggerFactory.getLogger(CourseGroupController.class);
+
+    @GetMapping("")
+    public Iterable<CourseGroup> getCourseGroups() {
+        return courseGroupRepository.findAll();
+    }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -49,6 +55,7 @@ public class CourseGroupController {
         this.courseGroupRepository.save(courseGroupFromDB);
 
         // Add new schedules to the course group
+        schedules.forEach(schedule -> schedule.setCourseGroup(courseGroupFromDB));
         courseGroupFromDB.setSchedules(schedules);
         this.courseGroupRepository.save(courseGroupFromDB);
         return courseGroupFromDB;
