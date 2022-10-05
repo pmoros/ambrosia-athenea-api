@@ -42,7 +42,7 @@ public class EnrollmentController {
                                     .findByCourseCodeAndCourseGroupCode(c.getCourseCode(), c.getCourseGroupCode())
                                     .get(0);
                             cg.getEnrollments().add(enrollmentToSave);
-                            // courseGroupRepository.save(cg);
+                            cg.setTaken(Integer.toString(Integer.parseInt(cg.getTaken()) + 1));
                             return cg;
                         }).collect(Collectors.toList()));
 
