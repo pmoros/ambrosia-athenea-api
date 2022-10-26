@@ -1,8 +1,6 @@
-FROM gradle:7.5-jdk8
-WORKDIR /.
-COPY . .
-ENV GRADLE_HOME=/app/gradle-7.5
-ENV PATH=$PATH:$GRADLE_HOME/bin
-
+FROM openjdk:17-alpine
+ARG JAR_FILE=build/libs/*SNAPSHOT.jar
+WORKDIR /app
+COPY ${JAR_FILE} app.jar
 EXPOSE 8080
-CMD ["bash", "gradlew", "bootRun"]
+ENTRYPOINT ["java","-jar","app.jar"]
