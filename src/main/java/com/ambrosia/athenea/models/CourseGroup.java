@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -44,4 +45,7 @@ public class CourseGroup implements Serializable {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @OneToMany(mappedBy = "courseGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Schedule> schedules;
+
+    @ManyToMany(mappedBy = "courseGroups")
+    private List<AcademicHistory> academicHistories;
 }
