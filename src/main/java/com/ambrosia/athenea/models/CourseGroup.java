@@ -46,6 +46,6 @@ public class CourseGroup implements Serializable {
     @OneToMany(mappedBy = "courseGroup", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
-    @ManyToMany
-    private List<User> students;
+    @ManyToMany(mappedBy = "courseGroups")
+    private List<AcademicHistory> academicHistories;
 }
