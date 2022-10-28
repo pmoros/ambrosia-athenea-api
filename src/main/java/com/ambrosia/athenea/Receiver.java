@@ -3,18 +3,25 @@ package com.ambrosia.athenea;
 import java.util.concurrent.CountDownLatch;
 import org.springframework.stereotype.Component;
 
+import com.ambrosia.athenea.controllers.EnrollmentController;
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Component
 public class Receiver {
+
+    @Autowired
+    EnrollmentController enrollmentController;
 
     private CountDownLatch latch = new CountDownLatch(1);
 
     public void receiveMessage(String message) {
-        // Enrollment enrollment =
         String enrollment = this.getEnrollmentFromMessage(message);
         String[] enrollmentFields = this.getFieldsFromEnrollment(enrollment);
-        String courseCode = enrollmentFields[0];
+        String studentCode = enrollmentFields[0];
         String academicHistoryCode = enrollmentFields[1];
         String[] courseGroupsCodes = enrollmentFields[2].split(",");
+
+        enrollmentController.createEnrollment(studentCode, academicHistoryCode, courseGroupsCodes);
 
         latch.countDown();
     }
