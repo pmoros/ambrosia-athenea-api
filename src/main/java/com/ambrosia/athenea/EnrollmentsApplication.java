@@ -11,6 +11,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
+
 @SpringBootApplication
 public class EnrollmentsApplication {
 
@@ -46,7 +47,7 @@ public class EnrollmentsApplication {
 	@Bean
 	MessageListenerAdapter listenerAdapter(Receiver receiver) {
 		return new MessageListenerAdapter(receiver, "receiveMessage");
-	}	
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(EnrollmentsApplication.class, args);
