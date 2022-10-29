@@ -35,6 +35,7 @@ src/**/build/
 /build/
 build/
 !build/libs/*.jar
+!build/libs/**
 # Ignore Gradle GUI config
 gradle-app.setting
 
