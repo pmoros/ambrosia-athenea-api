@@ -32,9 +32,8 @@ replay_pid*
 # End of https://www.toptal.com/developers/gitignore/api/java
 .gradle
 src/**/build/
-/build/
 build/*
-!build/libs/*
+!build/libs/
 # Ignore Gradle GUI config
 gradle-app.setting
 
