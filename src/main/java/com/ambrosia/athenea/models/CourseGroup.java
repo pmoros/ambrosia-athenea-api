@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Getter;
@@ -47,5 +48,6 @@ public class CourseGroup implements Serializable {
     private List<Schedule> schedules;
 
     @ManyToMany(mappedBy = "courseGroups")
+    @JsonIgnore
     private List<AcademicHistory> academicHistories;
 }
