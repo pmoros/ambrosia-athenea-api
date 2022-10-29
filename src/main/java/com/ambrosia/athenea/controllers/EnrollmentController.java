@@ -30,8 +30,12 @@ public class EnrollmentController {
         AcademicHistory academicHistory = academicHistoryRepository.findByStudentCodeAndCode(studentCode,
                 academicHistoryCode);
         List<CourseGroup> courseGroups = courseGroupRepository.findByCodeIn(courseGroupsCodes);
-        if (academicHistory != null && courseGroups != null) {
-            return academicHistory.getCourseGroups().addAll(courseGroups);
+        try {
+            if (academicHistory != null && courseGroups != null) {
+                return academicHistory.getCourseGroups().addAll(courseGroups);
+            }
+        } catch (Exception e) {
+            return false;
         }
 
         return false;
