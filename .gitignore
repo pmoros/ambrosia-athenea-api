@@ -34,7 +34,7 @@ replay_pid*
 src/**/build/
 /build/
 build/*
- !build/libs/*
+!build/libs/*
 # Ignore Gradle GUI config
 gradle-app.setting
 
