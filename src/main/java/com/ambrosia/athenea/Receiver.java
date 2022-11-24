@@ -15,6 +15,7 @@ public class Receiver {
     private CountDownLatch latch = new CountDownLatch(1);
 
     public void receiveMessage(String message) {
+        System.out.println(message);
         String enrollment = this.getEnrollmentFromMessage(message);
         String[] enrollmentFields = this.getFieldsFromEnrollment(enrollment);
         String studentCode = enrollmentFields[0];

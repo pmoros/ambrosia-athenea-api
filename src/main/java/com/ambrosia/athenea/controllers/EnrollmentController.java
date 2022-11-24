@@ -27,8 +27,7 @@ public class EnrollmentController {
     AcademicHistoryRepository academicHistoryRepository;
 
     public boolean createEnrollment(String studentCode, String academicHistoryCode, String[] courseGroupsCodes) {
-        AcademicHistory academicHistory = academicHistoryRepository.findByStudentCodeAndCode(studentCode,
-                academicHistoryCode);
+        AcademicHistory academicHistory = academicHistoryRepository.findByCode(academicHistoryCode);
         List<CourseGroup> courseGroups = courseGroupRepository.findByCodeIn(courseGroupsCodes);
         try {
             if (academicHistory != null && courseGroups != null) {
